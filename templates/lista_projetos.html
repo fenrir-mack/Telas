@@ -20,15 +20,15 @@
     <nav class="menu">
 
         <a href="/dashboard">
-            ▦ <span>Dashboard</span>
+            <img src="{{ url_for('static', filename='pngs/dashboard.png') }}" alt="Dashboard" style="width:18px; height:18px; vertical-align:text-bottom; filter: grayscale(100%) opacity(0.6);"> <span>Dashboard</span>
         </a>
 
         <a href="/empresas">
-            ▤ <span>Empresas</span>
+            <img src="{{ url_for('static', filename='pngs/business-and-trade.png') }}" alt="Empresas" style="width:18px; height:18px; vertical-align:text-bottom; filter: grayscale(100%) opacity(0.6);"> <span>Empresas</span>
         </a>
 
         <a class="active" href="/projetos">
-            ▣ <span>Projetos</span>
+            <img src="{{ url_for('static', filename='pngs/folder.png') }}" alt="Projetos" style="width:18px; height:18px; vertical-align:text-bottom; filter: brightness(0) invert(1);"> <span>Projetos</span>
         </a>
 
     </nav>
@@ -45,9 +45,6 @@
                     ♙ Meu Perfil
                 </a>
 
-                <a href="/configuracoes">
-                    ⚙ Configurações
-                </a>
 
                 <div class="menu-divider"></div>
 

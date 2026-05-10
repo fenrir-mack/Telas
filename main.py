@@ -31,6 +31,13 @@ def confirmacao_senha():
     return render_template("confirmacao_senha.html")
 
 
+@app.route("/criar-senha", methods=["GET", "POST"])
+def criar_senha():
+    if request.method == "POST":
+        return redirect(url_for("login"))
+    return render_template("criar_senha.html")
+
+
 @app.route("/dashboard")
 def dashboard():
     return render_template("dashboard.html")
@@ -39,17 +46,38 @@ def dashboard():
 def perfil():
     return render_template("perfil.html")
 
-@app.route("/configuracoes")
-def configuracoes():
-    return render_template("configuracoes.html")
+
+@app.route("/projeto")
+def projeto():
+    # Página de um projeto específico
+    return render_template("projeto.html")
+
+
+@app.route("/empresa")
+def empresa():
+    # Página de uma empresa específica
+    return render_template("empresa.html")
+
+
+@app.route("/projeto/membros")
+def projeto_membros():
+    return render_template("projeto_membros.html")
+
+@app.route("/projeto/solicitacoes")
+def projeto_solicitacoes():
+    return render_template("projeto_solicitacoes.html")
+
+@app.route("/projeto/configuracoes")
+def projeto_configuracoes():
+    return render_template("projeto_configuracoes.html")
 
 @app.route("/empresas")
 def empresas():
-    return render_template("empresas.html")
+    return render_template("lista_empresas.html")
 
 @app.route("/projetos")
 def projetos():
-    return render_template("projetos.html")
+    return render_template("lista_projetos.html")
 
 if __name__ == "__main__":
     app.run(debug=True)

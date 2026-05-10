@@ -14,9 +14,15 @@
     </div>
 
     <nav class="menu">
-        <a href="/dashboard">▦ <span>Dashboard</span></a>
-        <a href="/empresas">▤ <span>Empresas</span></a>
-        <a href="/projetos">▣ <span>Projetos</span></a>
+        <a href="/dashboard">
+            <img src="{{ url_for('static', filename='pngs/dashboard.png') }}" alt="Dashboard" style="width:18px; height:18px; vertical-align:text-bottom; filter: grayscale(100%) opacity(0.6);"> <span>Dashboard</span>
+        </a>
+        <a href="/empresas">
+            <img src="{{ url_for('static', filename='pngs/business-and-trade.png') }}" alt="Empresas" style="width:18px; height:18px; vertical-align:text-bottom; filter: grayscale(100%) opacity(0.6);"> <span>Empresas</span>
+        </a>
+        <a href="/projetos">
+            <img src="{{ url_for('static', filename='pngs/folder.png') }}" alt="Projetos" style="width:18px; height:18px; vertical-align:text-bottom; filter: grayscale(100%) opacity(0.6);"> <span>Projetos</span>
+        </a>
     </nav>
 
     <div class="sidebar-bottom">
@@ -27,7 +33,7 @@
 
         <div class="user-menu" id="userMenu">
             <a href="/perfil">♙ Meu Perfil</a>
-            <a href="/configuracoes">⚙ Configurações</a>
+
 
             <div class="menu-divider"></div>
 
