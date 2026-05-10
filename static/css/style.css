@@ -1793,8 +1793,11 @@ input:-webkit-autofill:active {
     gap: 8px;
 }
 .btn-sm {
-    padding: 7px 12px;
-    font-size: 13px;
+    padding: 8px 16px !important;
+    font-size: 13px !important;
+    height: auto;
+    width: fit-content;
+    white-space: nowrap;
 }
 .member-list {
     display: flex;
@@ -1898,7 +1901,9 @@ input:-webkit-autofill:active {
 .solicitation-actions .btn-primary, .solicitation-actions .btn-outline {
     flex: 1;
     justify-content: center;
-    padding: 8px 16px;
+    padding: 6px 16px !important;
+    font-size: 13px !important;
+    height: 36px;
 }
 
 /* Configuracoes Tab */
@@ -2011,3 +2016,83 @@ input:-webkit-autofill:active {
     font-weight: 500;
     cursor: pointer;
 }
+
+/* --- COMPANY DETAILS PAGE --- */
+.company-stats-grid {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+.company-stat-card {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 16px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+.company-stat-card span {
+    font-size: 13px;
+    color: #6b7280;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 8px;
+}
+.company-stat-card span img {
+    filter: grayscale(100%) opacity(0.6);
+}
+.company-stat-card strong {
+    font-size: 20px;
+    color: #111827;
+}
+.company-projects-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 16px;
+}
+.company-project-card {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 20px;
+}
+.company-project-card h4 {
+    margin: 0 0 8px 0;
+    font-size: 16px;
+    color: #111827;
+}
+.company-project-card p {
+    margin: 0;
+    font-size: 13px;
+    color: #6b7280;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.invite-code-box {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 16px;
+    margin-bottom: 24px;
+}
+.invite-code-info h4 {
+    margin: 0 0 4px 0;
+    font-size: 13px;
+    color: #6b7280;
+    font-weight: normal;
+}
+.invite-code-info p {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: #111827;
+}
+.role-badge.admin { background: #f3e8ff; color: #a855f7; }
+.role-badge.member { background: #f3f4f6; color: #6b7280; }

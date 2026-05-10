@@ -89,40 +89,33 @@
         </div>
 
         <div class="project-tabs">
-            <a href="/empresa" class="tab active">Projetos</a>
+            <a href="/empresa" class="tab">Projetos</a>
             <a href="/empresa/membros" class="tab">Membros</a>
-            <a href="/empresa/solicitacoes" class="tab">Solicitações <span class="tab-badge">2</span></a>
+            <a href="/empresa/solicitacoes" class="tab active">Solicitações <span class="tab-badge">2</span></a>
             <a href="/empresa/configuracoes" class="tab">Configurações</a>
         </div>
 
         <div class="members-header">
-            <h2>Projetos da Empresa</h2>
-            <button class="btn-primary btn-sm">
-                + Novo Projeto
-            </button>
+            <h2>Solicitações Pendentes</h2>
         </div>
 
-        <div class="company-projects-list">
-            <div class="company-project-card">
-                <h4>Sistema E-commerce</h4>
-                <p>
-                    <span style="display: flex; align-items: center; gap: 4px;"><img src="{{ url_for('static', filename='pngs/users.png') }}" alt="users" style="width:14px; height:14px; filter: grayscale(100%) opacity(0.6);"> 5</span>
-                    <span style="display: flex; align-items: center; gap: 4px;"><img src="{{ url_for('static', filename='pngs/file.png') }}" alt="docs" style="width:14px; height:14px; filter: grayscale(100%) opacity(0.6);"> 12 docs</span>
-                </p>
+        <div class="solicitation-card">
+            <div class="member-info">
+                <div class="member-avatar a">A</div>
+                <div class="member-details">
+                    <h4>Ana Paula</h4>
+                    <p>ana@email.com</p>
+                    <p style="margin-top:4px; font-size:12px;">Solicitou em 26/04/2026</p>
+                </div>
             </div>
-            <div class="company-project-card">
-                <h4>App Mobile Banking</h4>
-                <p>
-                    <span style="display: flex; align-items: center; gap: 4px;"><img src="{{ url_for('static', filename='pngs/users.png') }}" alt="users" style="width:14px; height:14px; filter: grayscale(100%) opacity(0.6);"> 3</span>
-                    <span style="display: flex; align-items: center; gap: 4px;"><img src="{{ url_for('static', filename='pngs/file.png') }}" alt="docs" style="width:14px; height:14px; filter: grayscale(100%) opacity(0.6);"> 8 docs</span>
-                </p>
+
+            <div class="solicitation-msg">
+                "Gostaria de participar da empresa"
             </div>
-            <div class="company-project-card">
-                <h4>Dashboard Analytics</h4>
-                <p>
-                    <span style="display: flex; align-items: center; gap: 4px;"><img src="{{ url_for('static', filename='pngs/users.png') }}" alt="users" style="width:14px; height:14px; filter: grayscale(100%) opacity(0.6);"> 4</span>
-                    <span style="display: flex; align-items: center; gap: 4px;"><img src="{{ url_for('static', filename='pngs/file.png') }}" alt="docs" style="width:14px; height:14px; filter: grayscale(100%) opacity(0.6);"> 15 docs</span>
-                </p>
+
+            <div class="solicitation-actions">
+                <button class="btn-primary">Aceitar</button>
+                <button class="btn-outline">Recusar</button>
             </div>
         </div>
 

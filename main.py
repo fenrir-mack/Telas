@@ -55,8 +55,19 @@ def projeto():
 
 @app.route("/empresa")
 def empresa():
-    # Página de uma empresa específica
     return render_template("empresa.html")
+
+@app.route("/empresa/membros")
+def empresa_membros():
+    return render_template("empresa_membros.html")
+
+@app.route("/empresa/solicitacoes")
+def empresa_solicitacoes():
+    return render_template("empresa_solicitacoes.html")
+
+@app.route("/empresa/configuracoes")
+def empresa_configuracoes():
+    return render_template("empresa_configuracoes.html")
 
 
 @app.route("/projeto/membros")

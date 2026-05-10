@@ -89,40 +89,104 @@
         </div>
 
         <div class="project-tabs">
-            <a href="/empresa" class="tab active">Projetos</a>
+            <a href="/empresa" class="tab">Projetos</a>
             <a href="/empresa/membros" class="tab">Membros</a>
             <a href="/empresa/solicitacoes" class="tab">Solicitações <span class="tab-badge">2</span></a>
-            <a href="/empresa/configuracoes" class="tab">Configurações</a>
+            <a href="/empresa/configuracoes" class="tab active">Configurações</a>
         </div>
 
-        <div class="members-header">
-            <h2>Projetos da Empresa</h2>
-            <button class="btn-primary btn-sm">
-                + Novo Projeto
+        <div class="config-section">
+            <h3>Informações Básicas</h3>
+
+            <div class="form-group-config">
+                <label>Nome da Empresa</label>
+                <input type="text" value="Empresa Demo">
+            </div>
+
+            <div class="form-group-config">
+                <label>Descrição</label>
+                <textarea>Empresa de desenvolvimento de software</textarea>
+            </div>
+
+            <div class="form-group-config">
+                <label>Segmento</label>
+                <select>
+                    <option selected>Tecnologia</option>
+                    <option>Consultoria</option>
+                    <option>Financeiro</option>
+                </select>
+            </div>
+
+            <button class="btn-primary" style="margin-top: 24px;">Salvar Alterações</button>
+        </div>
+
+        <div class="config-section" style="max-width: 500px;">
+            <h3>Código de Convite</h3>
+            <p class="sub">Compartilhe este código para convidar membros</p>
+            <div class="invite-code-box" style="margin-top: 16px; margin-bottom: 0;">
+                <div class="invite-code-info">
+                    <p style="font-size: 18px; letter-spacing: 2px;">ABC123XYZ</p>
+                </div>
+                <button class="btn-primary btn-sm">Copiar</button>
+            </div>
+        </div>
+
+        <div class="config-section">
+            <h3>Papéis e Permissões</h3>
+            <p class="sub">Defina os níveis de acesso para membros da empresa</p>
+
+            <div class="rbac-role">
+                <div>
+                    <h4>♕ Owner</h4>
+                    <p>Controle total da empresa</p>
+                    <div class="permission-tags">
+                        <span class="perm-tag">Gerenciar membros</span>
+                        <span class="perm-tag">Criar projetos</span>
+                        <span class="perm-tag">Configurações</span>
+                        <span class="perm-tag">Excluir empresa</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="rbac-role">
+                <div>
+                    <h4>⬡ Admin</h4>
+                    <p>Pode gerenciar projetos e membros</p>
+                    <div class="permission-tags">
+                        <span class="perm-tag">Gerenciar membros</span>
+                        <span class="perm-tag">Criar projetos</span>
+                        <span class="perm-tag">Editar configurações</span>
+                    </div>
+                </div>
+                <span class="rbac-edit">Editar</span>
+            </div>
+
+            <div class="rbac-role">
+                <div>
+                    <h4>♙ Member</h4>
+                    <p>Acesso básico à empresa</p>
+                    <div class="permission-tags">
+                        <span class="perm-tag">Ver projetos</span>
+                        <span class="perm-tag">Participar de projetos</span>
+                    </div>
+                </div>
+                <span class="rbac-edit">Editar</span>
+            </div>
+
+            <button class="btn-outline" style="width: auto; padding: 8px 16px; margin-top: 16px; font-size: 13px;">
+                + Criar Novo Papel
             </button>
         </div>
 
-        <div class="company-projects-list">
-            <div class="company-project-card">
-                <h4>Sistema E-commerce</h4>
-                <p>
-                    <span style="display: flex; align-items: center; gap: 4px;"><img src="{{ url_for('static', filename='pngs/users.png') }}" alt="users" style="width:14px; height:14px; filter: grayscale(100%) opacity(0.6);"> 5</span>
-                    <span style="display: flex; align-items: center; gap: 4px;"><img src="{{ url_for('static', filename='pngs/file.png') }}" alt="docs" style="width:14px; height:14px; filter: grayscale(100%) opacity(0.6);"> 12 docs</span>
-                </p>
-            </div>
-            <div class="company-project-card">
-                <h4>App Mobile Banking</h4>
-                <p>
-                    <span style="display: flex; align-items: center; gap: 4px;"><img src="{{ url_for('static', filename='pngs/users.png') }}" alt="users" style="width:14px; height:14px; filter: grayscale(100%) opacity(0.6);"> 3</span>
-                    <span style="display: flex; align-items: center; gap: 4px;"><img src="{{ url_for('static', filename='pngs/file.png') }}" alt="docs" style="width:14px; height:14px; filter: grayscale(100%) opacity(0.6);"> 8 docs</span>
-                </p>
-            </div>
-            <div class="company-project-card">
-                <h4>Dashboard Analytics</h4>
-                <p>
-                    <span style="display: flex; align-items: center; gap: 4px;"><img src="{{ url_for('static', filename='pngs/users.png') }}" alt="users" style="width:14px; height:14px; filter: grayscale(100%) opacity(0.6);"> 4</span>
-                    <span style="display: flex; align-items: center; gap: 4px;"><img src="{{ url_for('static', filename='pngs/file.png') }}" alt="docs" style="width:14px; height:14px; filter: grayscale(100%) opacity(0.6);"> 15 docs</span>
-                </p>
+        <div class="danger-zone">
+            <h3>Zona de Perigo</h3>
+
+            <div class="danger-item-flex" style="margin-bottom: 0;">
+                <div>
+                    <h4>Excluir Empresa</h4>
+                    <p>Exclui permanentemente esta empresa, incluindo todos os seus projetos, arquivos e membros. Essa ação não pode ser desfeita.</p>
+                </div>
+                <button class="btn-danger-outline" style="background: #dc2626; color: white;">Excluir Empresa</button>
             </div>
         </div>
 
