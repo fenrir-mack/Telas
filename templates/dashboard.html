@@ -22,15 +22,15 @@
     <!-- MENU -->
     <nav class="menu">
         <a class="active" href="/dashboard">
-            ▦ <span>Dashboard</span>
+            <img src="{{ url_for('static', filename='pngs/dashboard.png') }}" alt="Dashboard" style="width:18px; height:18px;"> <span>Dashboard</span>
         </a>
 
         <a href="/empresas">
-            ▤ <span>Empresas</span>
+            <img src="{{ url_for('static', filename='pngs/business-and-trade.png') }}" alt="Empresas" style="width:18px; height:18px;"> <span>Empresas</span>
         </a>
 
         <a href="/projetos">
-            ▣ <span>Projetos</span>
+            <img src="{{ url_for('static', filename='pngs/folder.png') }}" alt="Projetos" style="width:18px; height:18px;"> <span>Projetos</span>
         </a>
     </nav>
 
@@ -38,40 +38,7 @@
     <div class="sidebar-bottom">
 
         <!-- EMPRESA -->
-        <div class="company-dropdown-area">
 
-    <div class="company-menu" id="companyMenu">
-
-        <a href="#">
-            Empresa Demo
-        </a>
-
-        <a href="#">
-            Outra Empresa
-        </a>
-
-        <div class="company-divider"></div>
-
-        <a href="/empresas" class="create-company-link">
-            + Criar nova empresa
-        </a>
-
-    </div>
-
-    <button
-        class="company-select company-toggle"
-        onclick="toggleCompanyMenu()"
-    >
-
-        <span>
-            ▤ <strong>Empresa Demo</strong>
-        </span>
-
-        <span>⌄</span>
-
-    </button>
-
-</div>
 
         <!-- MENU DROPDOWN DO USUÁRIO -->
         <div class="user-dropdown-area">
@@ -126,8 +93,8 @@
         <header class="dash-header">
             <h1>Olá, Usuário! 👋</h1>
 
-            <p>
-                ▤ Empresa atual:
+            <p style="display:flex; align-items:center; gap:6px;">
+                <img src="{{ url_for('static', filename='pngs/business-and-trade.png') }}" alt="Empresa" style="width:16px; height:16px;"> Empresa atual:
                 <strong>Empresa Demo</strong>
             </p>
         </header>
@@ -139,7 +106,7 @@
 
                 <div class="stat-top">
                     <div class="stat-icon blue">
-                        ▣
+                        <img src="{{ url_for('static', filename='pngs/folder.png') }}" alt="Projetos" style="width:24px; height:24px; filter: brightness(0) invert(1);">
                     </div>
 
                     <span>↗</span>
@@ -154,7 +121,7 @@
 
                 <div class="stat-top">
                     <div class="stat-icon green">
-                        ▤
+                        <img src="{{ url_for('static', filename='pngs/file.png') }}" alt="Documentos" style="width:24px; height:24px; filter: brightness(0) invert(1);">
                     </div>
 
                     <span>↗</span>
@@ -169,7 +136,7 @@
 
                 <div class="stat-top">
                     <div class="stat-icon purple">
-                        ▱
+                        <img src="{{ url_for('static', filename='pngs/presentation.png') }}" alt="Apresentações" style="width:24px; height:24px; filter: brightness(0) invert(1);">
                     </div>
 
                     <span>↗</span>
@@ -184,7 +151,7 @@
 
                 <div class="stat-top">
                     <div class="stat-icon orange">
-                        ▧
+                        <img src="{{ url_for('static', filename='pngs/diagram.png') }}" alt="Diagramas" style="width:24px; height:24px; filter: brightness(0) invert(1);">
                     </div>
 
                     <span>↗</span>
@@ -204,7 +171,7 @@
             <div class="panel">
 
                 <div class="panel-title">
-                    <h2>◷ Projetos Recentes</h2>
+                    <h2><img src="{{ url_for('static', filename='pngs/clock.png') }}" alt="Recentes" style="width:20px; height:20px; vertical-align:text-bottom;"> Projetos Recentes</h2>
 
                     <a href="#">
                         Ver todos ›
@@ -215,7 +182,7 @@
                 <div class="list-item">
 
                     <div class="item-icon purple">
-                        ▣
+                        <img src="{{ url_for('static', filename='pngs/folder.png') }}" alt="Projeto" style="width:20px; height:20px; filter: brightness(0) invert(1);">
                     </div>
 
                     <div class="item-text">
@@ -224,8 +191,8 @@
                     </div>
 
                     <div class="item-meta">
-                        ▤ 12 &nbsp;&nbsp;
-                        ♙ 5 &nbsp;&nbsp;
+                        <img src="{{ url_for('static', filename='pngs/file.png') }}" alt="file" style="width:14px; height:14px; vertical-align:text-bottom; filter: grayscale(100%) opacity(0.6);"> 12 &nbsp;&nbsp;
+                        <img src="{{ url_for('static', filename='pngs/users.png') }}" alt="users" style="width:14px; height:14px; vertical-align:text-bottom; filter: grayscale(100%) opacity(0.6);"> 5 &nbsp;&nbsp;
                         ›
                     </div>
 
@@ -235,7 +202,7 @@
                 <div class="list-item">
 
                     <div class="item-icon purple">
-                        ▣
+                        <img src="{{ url_for('static', filename='pngs/folder.png') }}" alt="Projeto" style="width:20px; height:20px; filter: brightness(0) invert(1);">
                     </div>
 
                     <div class="item-text">
@@ -244,8 +211,8 @@
                     </div>
 
                     <div class="item-meta">
-                        ▤ 8 &nbsp;&nbsp;
-                        ♙ 3 &nbsp;&nbsp;
+                        <img src="{{ url_for('static', filename='pngs/file.png') }}" alt="file" style="width:14px; height:14px; vertical-align:text-bottom; filter: grayscale(100%) opacity(0.6);"> 8 &nbsp;&nbsp;
+                        <img src="{{ url_for('static', filename='pngs/users.png') }}" alt="users" style="width:14px; height:14px; vertical-align:text-bottom; filter: grayscale(100%) opacity(0.6);"> 3 &nbsp;&nbsp;
                         ›
                     </div>
 
@@ -255,7 +222,7 @@
                 <div class="list-item">
 
                     <div class="item-icon purple">
-                        ▣
+                        <img src="{{ url_for('static', filename='pngs/folder.png') }}" alt="Projeto" style="width:20px; height:20px; filter: brightness(0) invert(1);">
                     </div>
 
                     <div class="item-text">
@@ -264,8 +231,8 @@
                     </div>
 
                     <div class="item-meta">
-                        ▤ 15 &nbsp;&nbsp;
-                        ♙ 4 &nbsp;&nbsp;
+                        <img src="{{ url_for('static', filename='pngs/file.png') }}" alt="file" style="width:14px; height:14px; vertical-align:text-bottom; filter: grayscale(100%) opacity(0.6);"> 15 &nbsp;&nbsp;
+                        <img src="{{ url_for('static', filename='pngs/users.png') }}" alt="users" style="width:14px; height:14px; vertical-align:text-bottom; filter: grayscale(100%) opacity(0.6);"> 4 &nbsp;&nbsp;
                         ›
                     </div>
 
@@ -278,7 +245,7 @@
 
                 <div class="panel-title">
 
-                    <h2>▤ Minhas Empresas</h2>
+                    <h2><img src="{{ url_for('static', filename='pngs/business-and-trade.png') }}" alt="Empresas" style="width:20px; height:20px; vertical-align:text-bottom;"> Minhas Empresas</h2>
 
                     <a href="#">
                         Ver todas ›
@@ -290,7 +257,7 @@
                 <div class="list-item company-item">
 
                     <div class="item-icon green">
-                        ▤
+                        <img src="{{ url_for('static', filename='pngs/business-and-trade.png') }}" alt="Empresa" style="width:20px; height:20px; filter: brightness(0) invert(1);">
                     </div>
 
                     <div class="item-text">
@@ -310,7 +277,7 @@
                 <div class="list-item company-item">
 
                     <div class="item-icon green">
-                        ▤
+                        <img src="{{ url_for('static', filename='pngs/business-and-trade.png') }}" alt="Empresa" style="width:20px; height:20px; filter: brightness(0) invert(1);">
                     </div>
 
                     <div class="item-text">

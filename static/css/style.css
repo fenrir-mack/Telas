@@ -19,7 +19,7 @@ body {
 }
 
 .login-page {
-    padding-top: 177px;
+    padding-top: 80px;
 }
 
 .cadastro-page {
@@ -304,6 +304,43 @@ footer {
         width: 100%;
     }
 }
+
+/* =========================
+   CONFIRMAÇÃO SENHA
+========================= */
+
+.confirm-card {
+    text-align: center;
+}
+
+.confirm-icon {
+    font-size: 52px;
+    margin-bottom: 18px;
+    line-height: 1;
+}
+
+.confirm-btn {
+    display: block;
+    width: 100%;
+    height: 56px;
+    border-radius: 10px;
+    background: #465cf4;
+    color: white;
+    font-size: 16px;
+    font-weight: 800;
+    text-align: center;
+    line-height: 56px;
+    margin-top: 8px;
+    text-decoration: none;
+}
+
+.confirm-resend {
+    margin-top: 22px;
+    font-size: 14px;
+    color: #64748b;
+}
+
+
 
 .dashboard-body {
     min-height: 100vh;
