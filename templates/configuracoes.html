@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>DocuIA - Configurações</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="dashboard-body">
+
+<aside class="sidebar">
+
+    <div class="sidebar-logo">
+        <h2>DocuIA</h2>
+        <p>Documentação Inteligente</p>
+    </div>
+
+    <nav class="menu">
+        <a href="/dashboard">▦ <span>Dashboard</span></a>
+        <a href="/empresas">▤ <span>Empresas</span></a>
+        <a href="/projetos">▣ <span>Projetos</span></a>
+    </nav>
+
+    <div class="sidebar-bottom">
+
+    <div class="company-dropdown-area">
+
+    <div class="company-menu" id="companyMenu">
+
+        <a href="#">
+            Empresa Demo
+        </a>
+
+        <a href="#">
+            Outra Empresa
+        </a>
+
+        <div class="company-divider"></div>
+
+        <a href="/empresas" class="create-company-link">
+            + Criar nova empresa
+        </a>
+
+    </div>
+
+    <button
+        class="company-select company-toggle"
+        onclick="toggleCompanyMenu()"
+    >
+
+        <span>
+            ▤ <strong>Empresa Demo</strong>
+        </span>
+
+        <span>⌄</span>
+
+    </button>
+
+</div>
+
+    <div class="user-dropdown-area">
+
+        <div class="user-menu" id="userMenu">
+            <a href="/perfil">♙ Meu Perfil</a>
+            <a href="/configuracoes">⚙ Configurações</a>
+
+            <div class="menu-divider"></div>
+
+            <a href="/login" class="logout-link">↪ Sair</a>
+        </div>
+
+        <button class="user-box user-toggle" onclick="toggleUserMenu()">
+            <div class="profile-mini-avatar">U</div>
+
+            <div class="user-info">
+                <strong>Usuário</strong>
+                <p>asd@a</p>
+            </div>
+
+            <span class="dropdown-arrow">⌄</span>
+        </button>
+
+    </div>
+
+</div>
+
+</aside>
+
+<main class="dashboard-main">
+
+<section class="settings-content">
+
+    <header class="settings-header">
+        <h1>Configurações</h1>
+        <p>Gerencie suas preferências e configurações da conta</p>
+    </header>
+
+    <!-- NOTIFICAÇÕES -->
+
+    <section class="settings-card">
+
+        <div class="settings-card-title">
+            <div class="settings-icon blue-soft">◔</div>
+
+            <div>
+                <h2>Notificações</h2>
+                <p>Gerencie como você recebe notificações</p>
+            </div>
+        </div>
+
+        <div class="setting-item">
+            <div>
+                <strong>Notificações por e-mail</strong>
+                <p>Receber atualizações importantes por e-mail</p>
+            </div>
+
+            <input type="checkbox" checked>
+        </div>
+
+        <div class="setting-item">
+            <div>
+                <strong>Atualizações de projetos</strong>
+                <p>Novos documentos, relatórios e diagramas</p>
+            </div>
+
+            <input type="checkbox" checked>
+        </div>
+
+        <div class="setting-item">
+            <div>
+                <strong>Atividade de membros</strong>
+                <p>Quando membros entram ou saem de projetos</p>
+            </div>
+
+            <input type="checkbox">
+        </div>
+
+        <div class="setting-item">
+            <div>
+                <strong>Relatório semanal</strong>
+                <p>Resumo de atividades da semana</p>
+            </div>
+
+            <input type="checkbox" checked>
+        </div>
+
+    </section>
+
+    <!-- PRIVACIDADE -->
+
+    <section class="settings-card">
+
+        <div class="settings-card-title">
+            <div class="settings-icon purple-soft">▢</div>
+
+            <div>
+                <h2>Privacidade</h2>
+                <p>Controle quem pode ver suas informações</p>
+            </div>
+        </div>
+
+        <div class="settings-block">
+            <label>Visibilidade do perfil</label>
+
+            <select>
+                <option>Empresa (apenas membros da empresa)</option>
+            </select>
+        </div>
+
+        <div class="setting-item">
+            <div>
+                <strong>Mostrar e-mail no perfil</strong>
+                <p>Outros usuários poderão ver seu e-mail</p>
+            </div>
+
+            <input type="checkbox">
+        </div>
+
+    </section>
+
+    <!-- IDIOMA -->
+
+    <section class="settings-card">
+
+        <div class="settings-card-title">
+            <div class="settings-icon green-soft">◍</div>
+
+            <div>
+                <h2>Idioma e Região</h2>
+                <p>Preferências de idioma e formato</p>
+            </div>
+        </div>
+
+        <div class="settings-block">
+            <label>Idioma</label>
+
+            <select>
+                <option>Português (Brasil)</option>
+            </select>
+        </div>
+
+        <div class="settings-block">
+            <label>Fuso Horário</label>
+
+            <select>
+                <option>América/São Paulo (GMT-3)</option>
+            </select>
+        </div>
+
+        <div class="settings-block">
+            <label>Formato de Data</label>
+
+            <select>
+                <option>DD/MM/AAAA</option>
+            </select>
+        </div>
+
+    </section>
+
+    <!-- APARÊNCIA -->
+
+    <section class="settings-card">
+
+        <div class="settings-card-title">
+            <div class="settings-icon orange-soft">◉</div>
+
+            <div>
+                <h2>Aparência</h2>
+                <p>Personalize a interface</p>
+            </div>
+        </div>
+
+        <div class="settings-block">
+            <label>Tema</label>
+
+            <div class="theme-grid">
+                <button type="button">Claro</button>
+                <button type="button">Escuro</button>
+                <button type="button">Automático</button>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ZONA DE PERIGO -->
+
+    <section class="danger-card">
+
+        <h2>Zona de Perigo</h2>
+
+        <div class="danger-item">
+            <div>
+                <strong>Desativar conta</strong>
+                <p>Desative temporariamente sua conta</p>
+            </div>
+
+            <span>▢</span>
+        </div>
+
+        <div class="danger-item">
+            <div>
+                <strong>Excluir conta</strong>
+                <p>Exclua permanentemente sua conta e dados</p>
+            </div>
+
+            <span>▢</span>
+        </div>
+
+    </section>
+
+    <div class="settings-footer">
+        <button class="save-settings-btn">
+            Salvar Alterações
+        </button>
+    </div>
+
+</section>
+
+</main>
+
+<div class="help-btn">?</div>
+
+<script>
+function toggleUserMenu() {
+    const menu = document.getElementById("userMenu");
+    menu.classList.toggle("show");
+}
+
+window.addEventListener("click", function(e) {
+    const menu = document.getElementById("userMenu");
+    const button = document.querySelector(".user-toggle");
+
+    if (!menu.contains(e.target) && !button.contains(e.target)) {
+        menu.classList.remove("show");
+    }
+});
+</script>
+
+<script>
+function toggleCompanyMenu() {
+
+    const menu = document.getElementById("companyMenu");
+
+    menu.classList.toggle("show");
+
+}
+
+window.addEventListener("click", function(e) {
+
+    const menu = document.getElementById("companyMenu");
+
+    const button = document.querySelector(".company-toggle");
+
+    if (
+        !menu.contains(e.target)
+        &&
+        !button.contains(e.target)
+    ) {
+        menu.classList.remove("show");
+    }
+
+});
+</script>
+
+</body>
+</html>

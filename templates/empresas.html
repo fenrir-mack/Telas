@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>DocuIA - Empresas</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body class="dashboard-body">
+
+<aside class="sidebar">
+    <div class="sidebar-logo">
+        <h2>DocuIA</h2>
+        <p>Documentação Inteligente</p>
+    </div>
+
+    <nav class="menu">
+        <a href="/dashboard">▦ <span>Dashboard</span></a>
+        <a class="active" href="/empresas">▤ <span>Empresas</span></a>
+        <a href="/projetos">▣ <span>Projetos</span></a>
+    </nav>
+
+    <div class="sidebar-bottom">
+        <div class="company-dropdown-area">
+
+    <div class="company-menu" id="companyMenu">
+
+        <a href="#">
+            Empresa Demo
+        </a>
+
+        <a href="#">
+            Outra Empresa
+        </a>
+
+        <div class="company-divider"></div>
+
+        <a href="/empresas" class="create-company-link">
+            + Criar nova empresa
+        </a>
+
+    </div>
+
+    <button
+        class="company-select company-toggle"
+        onclick="toggleCompanyMenu()"
+    >
+
+        <span>
+            ▤ <strong>Empresa Demo</strong>
+        </span>
+
+        <span>⌄</span>
+
+    </button>
+
+</div>
+
+        <div class="user-dropdown-area">
+            <div class="user-menu" id="userMenu">
+                <a href="/perfil">♙ Meu Perfil</a>
+                <a href="/configuracoes">⚙ Configurações</a>
+
+                <div class="menu-divider"></div>
+
+                <a href="/login" class="logout-link">↪ Sair</a>
+            </div>
+
+            <button class="user-box user-toggle" onclick="toggleUserMenu()">
+                <div class="profile-mini-avatar">U</div>
+
+                <div class="user-info">
+                    <strong>Usuário</strong>
+                    <p>asd@a</p>
+                </div>
+
+                <span class="dropdown-arrow">⌄</span>
+            </button>
+        </div>
+    </div>
+</aside>
+
+<main class="dashboard-main">
+
+    <section class="companies-content">
+
+        <header class="companies-header">
+            <div>
+                <h1>Minhas Empresas</h1>
+                <p>Gerencie suas organizações e empresas</p>
+            </div>
+
+            <button class="new-company-btn">
+                + Nova Empresa
+            </button>
+        </header>
+
+        <div class="company-search">
+            <span>⌕</span>
+            <input type="text" placeholder="Buscar empresas...">
+        </div>
+
+        <section class="companies-grid">
+
+            <article class="company-card">
+                <div class="company-card-top">
+                    <div class="company-big-icon purple">▤</div>
+                    <span class="dots">⋮</span>
+                </div>
+
+                <h2>Empresa Demo</h2>
+
+                <div class="badges">
+                    <span class="badge owner">♕ Proprietário</span>
+                    <span class="badge">Owner</span>
+                </div>
+
+                <div class="company-card-footer">
+                    <span>♙ 12 membros</span>
+                    <span>▣ 8 projetos</span>
+                </div>
+            </article>
+
+            <article class="company-card">
+                <div class="company-card-top">
+                    <div class="company-big-icon green">▤</div>
+                    <span class="dots">⋮</span>
+                </div>
+
+                <h2>Tech Startup Inc</h2>
+
+                <div class="badges">
+                    <span class="badge">Admin</span>
+                </div>
+
+                <div class="company-card-footer">
+                    <span>♙ 5 membros</span>
+                    <span>▣ 3 projetos</span>
+                </div>
+            </article>
+
+            <article class="company-card">
+                <div class="company-card-top">
+                    <div class="company-big-icon red-orange">▤</div>
+                    <span class="dots">⋮</span>
+                </div>
+
+                <h2>Consultoria XYZ</h2>
+
+                <div class="badges">
+                    <span class="badge">Member</span>
+                </div>
+
+                <div class="company-card-footer">
+                    <span>♙ 25 membros</span>
+                    <span>▣ 15 projetos</span>
+                </div>
+            </article>
+
+        </section>
+
+    </section>
+
+</main>
+
+<div class="help-btn">?</div>
+
+<script>
+function toggleUserMenu() {
+    const menu = document.getElementById("userMenu");
+    menu.classList.toggle("show");
+}
+
+window.addEventListener("click", function(e) {
+    const menu = document.getElementById("userMenu");
+    const button = document.querySelector(".user-toggle");
+
+    if (!menu.contains(e.target) && !button.contains(e.target)) {
+        menu.classList.remove("show");
+    }
+});
+</script>
+
+<script>
+function toggleCompanyMenu() {
+
+    const menu = document.getElementById("companyMenu");
+
+    menu.classList.toggle("show");
+
+}
+
+window.addEventListener("click", function(e) {
+
+    const menu = document.getElementById("companyMenu");
+
+    const button = document.querySelector(".company-toggle");
+
+    if (
+        !menu.contains(e.target)
+        &&
+        !button.contains(e.target)
+    ) {
+        menu.classList.remove("show");
+    }
+
+});
+</script>
+
+</body>
+</html>

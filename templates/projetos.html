@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>DocuIA - Projetos</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body class="dashboard-body">
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+
+    <div class="sidebar-logo">
+        <h2>DocuIA</h2>
+        <p>Documentação Inteligente</p>
+    </div>
+
+    <nav class="menu">
+
+        <a href="/dashboard">
+            ▦ <span>Dashboard</span>
+        </a>
+
+        <a href="/empresas">
+            ▤ <span>Empresas</span>
+        </a>
+
+        <a class="active" href="/projetos">
+            ▣ <span>Projetos</span>
+        </a>
+
+    </nav>
+
+    <div class="sidebar-bottom">
+
+        <div class="company-dropdown-area">
+
+    <div class="company-menu" id="companyMenu">
+
+        <a href="#">
+            Empresa Demo
+        </a>
+
+        <a href="#">
+            Outra Empresa
+        </a>
+
+        <div class="company-divider"></div>
+
+        <a href="/empresas" class="create-company-link">
+            + Criar nova empresa
+        </a>
+
+    </div>
+
+    <button
+        class="company-select company-toggle"
+        onclick="toggleCompanyMenu()"
+    >
+
+        <span>
+            ▤ <strong>Empresa Demo</strong>
+        </span>
+
+        <span>⌄</span>
+
+    </button>
+
+</div>
+
+        <div class="user-dropdown-area">
+
+            <div class="user-menu" id="userMenu">
+
+                <a href="/perfil">
+                    ♙ Meu Perfil
+                </a>
+
+                <a href="/configuracoes">
+                    ⚙ Configurações
+                </a>
+
+                <div class="menu-divider"></div>
+
+                <a href="/login" class="logout-link">
+                    ↪ Sair
+                </a>
+
+            </div>
+
+            <button class="user-box user-toggle" onclick="toggleUserMenu()">
+
+                <div class="profile-mini-avatar">
+                    U
+                </div>
+
+                <div class="user-info">
+                    <strong>Usuário</strong>
+                    <p>asd@a</p>
+                </div>
+
+                <span class="dropdown-arrow">⌄</span>
+
+            </button>
+
+        </div>
+
+    </div>
+
+</aside>
+
+<!-- MAIN -->
+<main class="dashboard-main">
+
+    <section class="projects-content">
+
+        <!-- HEADER -->
+        <header class="projects-header">
+
+            <div>
+
+                <h1>Meus Projetos</h1>
+
+                <p>
+                    ▤ Empresa Demo
+                </p>
+
+            </div>
+
+            <button class="new-project-btn">
+                + Novo Projeto
+            </button>
+
+        </header>
+
+        <!-- SEARCH -->
+        <div class="projects-search">
+
+            <span>⌕</span>
+
+            <input
+                type="text"
+                placeholder="Buscar projetos pelo nome..."
+            >
+
+        </div>
+
+        <!-- FILTERS -->
+        <div class="projects-filters">
+
+            <button class="filter-btn active-filter">
+                Todos
+            </button>
+
+            <button class="filter-btn">
+                Ativos
+            </button>
+
+            <button class="filter-btn">
+                Arquivados
+            </button>
+
+            <div class="filter-divider"></div>
+
+            <select class="category-select">
+                <option>Todas Categorias</option>
+            </select>
+
+        </div>
+
+        <!-- GRID -->
+        <section class="projects-grid">
+
+            <!-- CARD -->
+            <article class="project-card">
+
+                <div class="project-top">
+
+                    <div class="project-main-info">
+
+                        <div class="project-icon">
+                            ▣
+                        </div>
+
+                        <div>
+
+                            <div class="project-title-row">
+
+                                <h2>
+                                    Sistema E-commerce
+                                </h2>
+
+                                <span class="star">
+                                    ⭐
+                                </span>
+
+                            </div>
+
+                            <div class="project-tags">
+
+                                <span class="tag green-tag">
+                                    Ativo
+                                </span>
+
+                                <span class="tag purple-tag">
+                                    ◇ Desenvolvimento
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <span class="project-dots">
+                        ⋮
+                    </span>
+
+                </div>
+
+                <p class="project-description">
+                    Plataforma completa de vendas online com integração de pagamentos
+                </p>
+
+                <p class="project-link">
+                    ⑂ github.com/empresa/ecommerce
+                </p>
+
+                <div class="project-footer">
+
+                    <span>♙ 5</span>
+
+                    <span>▤ 12</span>
+
+                    <span>◫ 24/04/2026</span>
+
+                </div>
+
+            </article>
+
+            <!-- CARD -->
+            <article class="project-card">
+
+                <div class="project-top">
+
+                    <div class="project-main-info">
+
+                        <div class="project-icon">
+                            ▣
+                        </div>
+
+                        <div>
+
+                            <div class="project-title-row">
+
+                                <h2>
+                                    App Mobile Banking
+                                </h2>
+
+                            </div>
+
+                            <div class="project-tags">
+
+                                <span class="tag green-tag">
+                                    Ativo
+                                </span>
+
+                                <span class="tag purple-tag">
+                                    ◇ Mobile
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <span class="project-dots">
+                        ⋮
+                    </span>
+
+                </div>
+
+                <p class="project-description">
+                    Aplicativo bancário para iOS e Android
+                </p>
+
+                <p class="project-link">
+                    ⑂ github.com/empresa/banking-app
+                </p>
+
+                <div class="project-footer">
+
+                    <span>♙ 3</span>
+
+                    <span>▤ 8</span>
+
+                    <span>◫ 23/04/2026</span>
+
+                </div>
+
+            </article>
+
+            <!-- CARD -->
+            <article class="project-card">
+
+                <div class="project-top">
+
+                    <div class="project-main-info">
+
+                        <div class="project-icon">
+                            ▣
+                        </div>
+
+                        <div>
+
+                            <div class="project-title-row">
+
+                                <h2>
+                                    Dashboard Analytics
+                                </h2>
+
+                                <span class="star">
+                                    ⭐
+                                </span>
+
+                            </div>
+
+                            <div class="project-tags">
+
+                                <span class="tag green-tag">
+                                    Ativo
+                                </span>
+
+                                <span class="tag purple-tag">
+                                    ◇ Data Science
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <span class="project-dots">
+                        ⋮
+                    </span>
+
+                </div>
+
+                <p class="project-description">
+                    Sistema de análise de dados e visualização
+                </p>
+
+                <p class="project-link">
+                    ⑂ github.com/empresa/analytics
+                </p>
+
+                <div class="project-footer">
+
+                    <span>♙ 4</span>
+
+                    <span>▤ 15</span>
+
+                    <span>◫ 22/04/2026</span>
+
+                </div>
+
+            </article>
+
+            <!-- CARD -->
+            <article class="project-card">
+
+                <div class="project-top">
+
+                    <div class="project-main-info">
+
+                        <div class="project-icon">
+                            ▣
+                        </div>
+
+                        <div>
+
+                            <div class="project-title-row">
+
+                                <h2>
+                                    API Gateway
+                                </h2>
+
+                            </div>
+
+                            <div class="project-tags">
+
+                                <span class="tag gray-tag">
+                                    Arquivado
+                                </span>
+
+                                <span class="tag purple-tag">
+                                    ◇ Backend
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <span class="project-dots">
+                        ⋮
+                    </span>
+
+                </div>
+
+                <p class="project-description">
+                    Gateway de microserviços com autenticação
+                </p>
+
+                <p class="project-link">
+                    ⑂ github.com/empresa/api-gateway
+                </p>
+
+                <div class="project-footer">
+
+                    <span>♙ 2</span>
+
+                    <span>▤ 6</span>
+
+                    <span>◫ 19/04/2026</span>
+
+                </div>
+
+            </article>
+
+        </section>
+
+    </section>
+
+</main>
+
+<div class="help-btn">
+    ?
+</div>
+
+<script>
+
+function toggleUserMenu() {
+
+    const menu = document.getElementById("userMenu");
+
+    menu.classList.toggle("show");
+
+}
+
+window.addEventListener("click", function(e) {
+
+    const menu = document.getElementById("userMenu");
+
+    const button = document.querySelector(".user-toggle");
+
+    if (
+        !menu.contains(e.target)
+        &&
+        !button.contains(e.target)
+    ) {
+        menu.classList.remove("show");
+    }
+
+});
+
+</script>
+<script>
+function toggleCompanyMenu() {
+
+    const menu = document.getElementById("companyMenu");
+
+    menu.classList.toggle("show");
+
+}
+
+window.addEventListener("click", function(e) {
+
+    const menu = document.getElementById("companyMenu");
+
+    const button = document.querySelector(".company-toggle");
+
+    if (
+        !menu.contains(e.target)
+        &&
+        !button.contains(e.target)
+    ) {
+        menu.classList.remove("show");
+    }
+
+});
+</script>
+
+</body>
+</html>

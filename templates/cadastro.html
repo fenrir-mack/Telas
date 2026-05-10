@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>DocuIA - Cadastro</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<main class="page cadastro-page">
+
+    <header class="logo cadastro-logo">
+        <h1>DocuIA</h1>
+        <p>Documentação Inteligente com IA</p>
+    </header>
+
+    <section class="card cadastro-card">
+        <h2>Criar sua conta</h2>
+        <p class="subtitle">Preencha os dados para começar</p>
+
+        <form>
+            <div class="form-group">
+                <label>Nome completo</label>
+                <div class="input-box">
+                    <span class="icon">♙</span>
+                    <input type="text" placeholder="Seu nome">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>E-mail</label>
+                <div class="input-box">
+                    <span class="icon">✉</span>
+                    <input type="email" placeholder="seu@email.com">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Senha</label>
+                <div class="input-box">
+                    <span class="icon">▢</span>
+                    <input type="password" value="12345678">
+                    <span class="eye">⊙</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Confirmar senha</label>
+                <div class="input-box">
+                    <span class="icon">▢</span>
+                    <input type="password" value="12345678">
+                    <span class="eye">⊙</span>
+                </div>
+            </div>
+
+            <label class="terms">
+                <input type="checkbox">
+                <span>
+                    Concordo com os <a href="#">Termos de Uso</a> e
+                    <a href="#">Política de Privacidade</a>
+                </span>
+            </label>
+
+            <button type="submit">
+                <span>♙+</span>
+                Criar conta
+            </button>
+        </form>
+
+        <p class="bottom-text">
+            Já tem uma conta? <a href="/login">Fazer login</a>
+        </p>
+    </section>
+
+    <footer>© 2026 DocuIA. Todos os direitos reservados.</footer>
+
+</main>
+
+</body>
+</html>

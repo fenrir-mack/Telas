@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DocuIA - Dashboard</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body class="dashboard-body">
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+
+    <!-- LOGO -->
+    <div class="sidebar-logo">
+        <h2>DocuIA</h2>
+        <p>Documentação Inteligente</p>
+    </div>
+
+    <!-- MENU -->
+    <nav class="menu">
+        <a class="active" href="/dashboard">
+            ▦ <span>Dashboard</span>
+        </a>
+
+        <a href="/empresas">
+            ▤ <span>Empresas</span>
+        </a>
+
+        <a href="/projetos">
+            ▣ <span>Projetos</span>
+        </a>
+    </nav>
+
+    <!-- PARTE INFERIOR -->
+    <div class="sidebar-bottom">
+
+        <!-- EMPRESA -->
+        <div class="company-dropdown-area">
+
+    <div class="company-menu" id="companyMenu">
+
+        <a href="#">
+            Empresa Demo
+        </a>
+
+        <a href="#">
+            Outra Empresa
+        </a>
+
+        <div class="company-divider"></div>
+
+        <a href="/empresas" class="create-company-link">
+            + Criar nova empresa
+        </a>
+
+    </div>
+
+    <button
+        class="company-select company-toggle"
+        onclick="toggleCompanyMenu()"
+    >
+
+        <span>
+            ▤ <strong>Empresa Demo</strong>
+        </span>
+
+        <span>⌄</span>
+
+    </button>
+
+</div>
+
+        <!-- MENU DROPDOWN DO USUÁRIO -->
+        <div class="user-dropdown-area">
+
+            <!-- MENU -->
+            <div class="user-menu" id="userMenu">
+
+                <a href="/perfil">
+                    ♙ Meu Perfil
+                </a>
+
+                <a href="/configuracoes">
+                    ⚙ Configurações
+                </a>
+
+                <div class="menu-divider"></div>
+
+                <a href="/login" class="logout-link">
+                    ↪ Sair
+                </a>
+
+            </div>
+
+            <!-- BOTÃO -->
+            <button class="user-box user-toggle" onclick="toggleUserMenu()">
+
+                <div class="profile-mini-avatar">
+                    U
+                </div>
+
+                <div class="user-info">
+                    <strong>Usuário</strong>
+                    <p>asd@a</p>
+                </div>
+
+                <span class="dropdown-arrow">⌄</span>
+
+            </button>
+
+        </div>
+
+    </div>
+
+</aside>
+
+<!-- CONTEÚDO -->
+<main class="dashboard-main">
+
+    <section class="dashboard-content">
+
+        <!-- HEADER -->
+        <header class="dash-header">
+            <h1>Olá, Usuário! 👋</h1>
+
+            <p>
+                ▤ Empresa atual:
+                <strong>Empresa Demo</strong>
+            </p>
+        </header>
+
+        <!-- CARDS -->
+        <section class="stats-grid">
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+                    <div class="stat-icon blue">
+                        ▣
+                    </div>
+
+                    <span>↗</span>
+                </div>
+
+                <h2>8</h2>
+                <p>Projetos Ativos</p>
+
+            </div>
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+                    <div class="stat-icon green">
+                        ▤
+                    </div>
+
+                    <span>↗</span>
+                </div>
+
+                <h2>35</h2>
+                <p>Documentos Gerados</p>
+
+            </div>
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+                    <div class="stat-icon purple">
+                        ▱
+                    </div>
+
+                    <span>↗</span>
+                </div>
+
+                <h2>12</h2>
+                <p>Apresentações</p>
+
+            </div>
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+                    <div class="stat-icon orange">
+                        ▧
+                    </div>
+
+                    <span>↗</span>
+                </div>
+
+                <h2>27</h2>
+                <p>Diagramas</p>
+
+            </div>
+
+        </section>
+
+        <!-- PAINÉIS -->
+        <section class="dash-panels">
+
+            <!-- PROJETOS -->
+            <div class="panel">
+
+                <div class="panel-title">
+                    <h2>◷ Projetos Recentes</h2>
+
+                    <a href="#">
+                        Ver todos ›
+                    </a>
+                </div>
+
+                <!-- ITEM -->
+                <div class="list-item">
+
+                    <div class="item-icon purple">
+                        ▣
+                    </div>
+
+                    <div class="item-text">
+                        <strong>Sistema E-commerce ⭐</strong>
+                        <p>2 horas atrás</p>
+                    </div>
+
+                    <div class="item-meta">
+                        ▤ 12 &nbsp;&nbsp;
+                        ♙ 5 &nbsp;&nbsp;
+                        ›
+                    </div>
+
+                </div>
+
+                <!-- ITEM -->
+                <div class="list-item">
+
+                    <div class="item-icon purple">
+                        ▣
+                    </div>
+
+                    <div class="item-text">
+                        <strong>App Mobile Banking</strong>
+                        <p>5 horas atrás</p>
+                    </div>
+
+                    <div class="item-meta">
+                        ▤ 8 &nbsp;&nbsp;
+                        ♙ 3 &nbsp;&nbsp;
+                        ›
+                    </div>
+
+                </div>
+
+                <!-- ITEM -->
+                <div class="list-item">
+
+                    <div class="item-icon purple">
+                        ▣
+                    </div>
+
+                    <div class="item-text">
+                        <strong>Dashboard Analytics ⭐</strong>
+                        <p>1 dia atrás</p>
+                    </div>
+
+                    <div class="item-meta">
+                        ▤ 15 &nbsp;&nbsp;
+                        ♙ 4 &nbsp;&nbsp;
+                        ›
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- EMPRESAS -->
+            <div class="panel">
+
+                <div class="panel-title">
+
+                    <h2>▤ Minhas Empresas</h2>
+
+                    <a href="#">
+                        Ver todas ›
+                    </a>
+
+                </div>
+
+                <!-- ITEM -->
+                <div class="list-item company-item">
+
+                    <div class="item-icon green">
+                        ▤
+                    </div>
+
+                    <div class="item-text">
+                        <strong>Empresa Demo</strong>
+                        <p>Owner</p>
+                    </div>
+
+                    <div class="item-meta">
+                        8 projetos &nbsp; • &nbsp;
+                        12 membros &nbsp;&nbsp;
+                        ›
+                    </div>
+
+                </div>
+
+                <!-- ITEM -->
+                <div class="list-item company-item">
+
+                    <div class="item-icon green">
+                        ▤
+                    </div>
+
+                    <div class="item-text">
+                        <strong>Tech Startup Inc</strong>
+                        <p>Member</p>
+                    </div>
+
+                    <div class="item-meta">
+                        3 projetos &nbsp; • &nbsp;
+                        5 membros &nbsp;&nbsp;
+                        ›
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </section>
+
+</main>
+
+<!-- BOTÃO AJUDA -->
+<div class="help-btn">
+    ?
+</div>
+
+<!-- SCRIPT -->
+<script>
+
+function toggleUserMenu() {
+
+    const menu = document.getElementById("userMenu");
+
+    menu.classList.toggle("show");
+
+}
+
+window.addEventListener("click", function(e) {
+
+    const menu = document.getElementById("userMenu");
+
+    const button = document.querySelector(".user-toggle");
+
+    if (
+        !menu.contains(e.target)
+        &&
+        !button.contains(e.target)
+    ) {
+        menu.classList.remove("show");
+    }
+
+});
+
+</script>
+
+<script>
+function toggleCompanyMenu() {
+
+    const menu = document.getElementById("companyMenu");
+
+    menu.classList.toggle("show");
+
+}
+
+window.addEventListener("click", function(e) {
+
+    const menu = document.getElementById("companyMenu");
+
+    const button = document.querySelector(".company-toggle");
+
+    if (
+        !menu.contains(e.target)
+        &&
+        !button.contains(e.target)
+    ) {
+        menu.classList.remove("show");
+    }
+
+});
+</script>
+
+</body>
+</html>
