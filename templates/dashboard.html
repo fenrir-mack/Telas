@@ -6,6 +6,8 @@
     <title>DocuIA - Dashboard</title>
 
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="{{ url_for('static', filename='js/auth-guard.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/api.js') }}"></script>
 </head>
 
 <body class="dashboard-body">
@@ -67,8 +69,8 @@
                 </div>
 
                 <div class="user-info">
-                    <strong>Usuário</strong>
-                    <p>asd@a</p>
+                    <strong id="sidebar-user-name">Usuário</strong>
+                    <p id="sidebar-user-email">email@exemplo.com</p>
                 </div>
 
                 <span class="dropdown-arrow">⌄</span>
@@ -88,11 +90,11 @@
 
         <!-- HEADER -->
         <header class="dash-header">
-            <h1>Olá, Usuário! 👋</h1>
+            <h1>Olá, <span id="welcome-user-name">Usuário</span>! 👋</h1>
 
             <p style="display:flex; align-items:center; gap:6px;">
                 <img src="{{ url_for('static', filename='pngs/business-and-trade.png') }}" alt="Empresa" style="width:16px; height:16px;"> Empresa atual:
-                <strong>Empresa Demo</strong>
+                <strong id="current-company-name">Carregando...</strong>
             </p>
         </header>
 
@@ -109,7 +111,7 @@
                     <span>↗</span>
                 </div>
 
-                <h2>8</h2>
+                <h2 id="stats-projects-count">0</h2>
                 <p>Projetos Ativos</p>
 
             </div>
@@ -175,65 +177,12 @@
                     </a>
                 </div>
 
-                <!-- ITEM -->
-                <a href="/projeto" class="list-item" style="text-decoration: none; color: inherit;">
+                </div>
 
-                    <div class="item-icon purple">
-                        <img src="{{ url_for('static', filename='pngs/folder.png') }}" alt="Projeto" style="width:20px; height:20px; filter: brightness(0) invert(1);">
-                    </div>
-
-                    <div class="item-text">
-                        <strong>Sistema E-commerce ⭐</strong>
-                        <p>2 horas atrás</p>
-                    </div>
-
-                    <div class="item-meta">
-                        <img src="{{ url_for('static', filename='pngs/file.png') }}" alt="file" style="width:14px; height:14px; vertical-align:text-bottom; filter: grayscale(100%) opacity(0.6);"> 12 &nbsp;&nbsp;
-                        <img src="{{ url_for('static', filename='pngs/users.png') }}" alt="users" style="width:14px; height:14px; vertical-align:text-bottom; filter: grayscale(100%) opacity(0.6);"> 5 &nbsp;&nbsp;
-                        ›
-                    </div>
-
-                </a>
-
-                <!-- ITEM -->
-                <a href="/projeto" class="list-item" style="text-decoration: none; color: inherit;">
-
-                    <div class="item-icon purple">
-                        <img src="{{ url_for('static', filename='pngs/folder.png') }}" alt="Projeto" style="width:20px; height:20px; filter: brightness(0) invert(1);">
-                    </div>
-
-                    <div class="item-text">
-                        <strong>App Mobile Banking</strong>
-                        <p>5 horas atrás</p>
-                    </div>
-
-                    <div class="item-meta">
-                        <img src="{{ url_for('static', filename='pngs/file.png') }}" alt="file" style="width:14px; height:14px; vertical-align:text-bottom; filter: grayscale(100%) opacity(0.6);"> 8 &nbsp;&nbsp;
-                        <img src="{{ url_for('static', filename='pngs/users.png') }}" alt="users" style="width:14px; height:14px; vertical-align:text-bottom; filter: grayscale(100%) opacity(0.6);"> 3 &nbsp;&nbsp;
-                        ›
-                    </div>
-
-                </a>
-
-                <!-- ITEM -->
-                <a href="/projeto" class="list-item" style="text-decoration: none; color: inherit;">
-
-                    <div class="item-icon purple">
-                        <img src="{{ url_for('static', filename='pngs/folder.png') }}" alt="Projeto" style="width:20px; height:20px; filter: brightness(0) invert(1);">
-                    </div>
-
-                    <div class="item-text">
-                        <strong>Dashboard Analytics ⭐</strong>
-                        <p>1 dia atrás</p>
-                    </div>
-
-                    <div class="item-meta">
-                        <img src="{{ url_for('static', filename='pngs/file.png') }}" alt="file" style="width:14px; height:14px; vertical-align:text-bottom; filter: grayscale(100%) opacity(0.6);"> 15 &nbsp;&nbsp;
-                        <img src="{{ url_for('static', filename='pngs/users.png') }}" alt="users" style="width:14px; height:14px; vertical-align:text-bottom; filter: grayscale(100%) opacity(0.6);"> 4 &nbsp;&nbsp;
-                        ›
-                    </div>
-
-                </a>
+                <div id="recent-projects-container">
+                    <!-- Projetos serão inseridos aqui via JS -->
+                    <p style="padding: 20px; color: #666;">Carregando projetos...</p>
+                </div>
 
             </div>
 
@@ -250,45 +199,12 @@
 
                 </div>
 
-                <!-- ITEM -->
-                <a href="/empresa" class="list-item company-item" style="text-decoration: none; color: inherit;">
+                </div>
 
-                    <div class="item-icon green">
-                        <img src="{{ url_for('static', filename='pngs/business-and-trade.png') }}" alt="Empresa" style="width:20px; height:20px; filter: brightness(0) invert(1);">
-                    </div>
-
-                    <div class="item-text">
-                        <strong>Empresa Demo</strong>
-                        <p>Owner</p>
-                    </div>
-
-                    <div class="item-meta">
-                        8 projetos &nbsp; • &nbsp;
-                        12 membros &nbsp;&nbsp;
-                        ›
-                    </div>
-
-                </a>
-
-                <!-- ITEM -->
-                <a href="/empresa" class="list-item company-item" style="text-decoration: none; color: inherit;">
-
-                    <div class="item-icon green">
-                        <img src="{{ url_for('static', filename='pngs/business-and-trade.png') }}" alt="Empresa" style="width:20px; height:20px; filter: brightness(0) invert(1);">
-                    </div>
-
-                    <div class="item-text">
-                        <strong>Tech Startup Inc</strong>
-                        <p>Member</p>
-                    </div>
-
-                    <div class="item-meta">
-                        3 projetos &nbsp; • &nbsp;
-                        5 membros &nbsp;&nbsp;
-                        ›
-                    </div>
-
-                </a>
+                <div id="my-companies-container">
+                    <!-- Empresas serão inseridas aqui via JS -->
+                    <p style="padding: 20px; color: #666;">Carregando empresas...</p>
+                </div>
 
             </div>
 
@@ -356,6 +272,96 @@ window.addEventListener("click", function(e) {
     }
 
 });
+</script>
+
+<script>
+// Lógica de carregamento de dados do Dashboard
+async function loadDashboardData() {
+    try {
+        // 1. Carregar Perfil do Usuário (MS1)
+        const userResponse = await fetch(API_URLS.auth + "/perfil/me", {
+            headers: authHeaders()
+        });
+        const userData = await handleResponse(userResponse);
+        
+        document.getElementById('sidebar-user-name').innerText = userData.nome;
+        document.getElementById('sidebar-user-email').innerText = userData.email;
+        document.getElementById('welcome-user-name').innerText = userData.nome;
+
+        // 2. Carregar Empresas (MS2)
+        const companiesResponse = await fetch(API_URLS.empresas + "/empresas", {
+            headers: authHeaders()
+        });
+        const companies = await handleResponse(companiesResponse);
+        renderCompanies(companies);
+
+        if (companies.length > 0) {
+            document.getElementById('current-company-name').innerText = companies[0].nome;
+        } else {
+            document.getElementById('current-company-name').innerText = "Nenhuma empresa selecionada";
+        }
+
+        // 3. Carregar Projetos (MS3)
+        const projectsResponse = await fetch(API_URLS.projetos + "/projetos", {
+            headers: authHeaders()
+        });
+        const projects = await handleResponse(projectsResponse);
+        renderProjects(projects);
+        document.getElementById('stats-projects-count').innerText = projects.length;
+
+    } catch (error) {
+        console.error("Erro ao carregar dashboard:", error);
+    }
+}
+
+function renderCompanies(companies) {
+    const container = document.getElementById('my-companies-container');
+    if (companies.length === 0) {
+        container.innerHTML = '<p style="padding: 20px; color: #666;">Você ainda não possui empresas.</p>';
+        return;
+    }
+
+    container.innerHTML = companies.map(c => `
+        <a href="/empresa?id=${c.id}" class="list-item company-item" style="text-decoration: none; color: inherit;">
+            <div class="item-icon green">
+                <img src="/static/pngs/business-and-trade.png" alt="Empresa" style="width:20px; height:20px; filter: brightness(0) invert(1);">
+            </div>
+            <div class="item-text">
+                <strong>${c.nome}</strong>
+                <p>${c.dono_id === parseInt(localStorage.getItem('user_id')) ? 'Owner' : 'Membro'}</p>
+            </div>
+            <div class="item-meta">
+                ›
+            </div>
+        </a>
+    `).join('');
+}
+
+function renderProjects(projects) {
+    const container = document.getElementById('recent-projects-container');
+    if (projects.length === 0) {
+        container.innerHTML = '<p style="padding: 20px; color: #666;">Nenhum projeto encontrado.</p>';
+        return;
+    }
+
+    container.innerHTML = projects.map(p => `
+        <a href="/projeto?id=${p.id}" class="list-item" style="text-decoration: none; color: inherit;">
+            <div class="item-icon purple">
+                <img src="/static/pngs/folder.png" alt="Projeto" style="width:20px; height:20px; filter: brightness(0) invert(1);">
+            </div>
+            <div class="item-text">
+                <strong>${p.nome} ${p.status === 'arquivado' ? '(Arquivado)' : ''}</strong>
+                <p>${p.status}</p>
+            </div>
+            <div class="item-meta">
+                ›
+            </div>
+        </a>
+    `).join('');
+}
+
+// Inicializa o carregamento
+document.addEventListener('DOMContentLoaded', loadDashboardData);
 </script>
 
 </body>

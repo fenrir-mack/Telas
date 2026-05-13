@@ -5,6 +5,8 @@
     <title>DocuIA - Projetos</title>
 
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="{{ url_for('static', filename='js/auth-guard.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/api.js') }}"></script>
 </head>
 
 <body class="dashboard-body">
@@ -61,8 +63,8 @@
                 </div>
 
                 <div class="user-info">
-                    <strong>Usuário</strong>
-                    <p>asd@a</p>
+                    <strong id="sidebar-user-name">Usuário</strong>
+                    <p id="sidebar-user-email">email@exemplo.com</p>
                 </div>
 
                 <span class="dropdown-arrow">⌄</span>
@@ -87,13 +89,13 @@
 
                 <h1>Meus Projetos</h1>
 
-                <p>
-                    ▤ Empresa Demo
+                <p id="header-subtitle">
+                    ▤ Geral
                 </p>
 
             </div>
 
-            <button class="new-project-btn">
+            <button class="new-project-btn" id="btn-novo-projeto">
                 + Novo Projeto
             </button>
 
@@ -135,268 +137,9 @@
         </div>
 
         <!-- GRID -->
-        <section class="projects-grid">
-
-            <!-- CARD -->
-            <article class="project-card">
-
-                <div class="project-top">
-
-                    <div class="project-main-info">
-
-                        <div class="project-icon">
-                            ▣
-                        </div>
-
-                        <div>
-
-                            <div class="project-title-row">
-
-                                <h2>
-                                    Sistema E-commerce
-                                </h2>
-
-                                <span class="star">
-                                    ⭐
-                                </span>
-
-                            </div>
-
-                            <div class="project-tags">
-
-                                <span class="tag green-tag">
-                                    Ativo
-                                </span>
-
-                                <span class="tag purple-tag">
-                                    ◇ Desenvolvimento
-                                </span>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <span class="project-dots">
-                        ⋮
-                    </span>
-
-                </div>
-
-                <p class="project-description">
-                    Plataforma completa de vendas online com integração de pagamentos
-                </p>
-
-                <p class="project-link">
-                    ⑂ github.com/empresa/ecommerce
-                </p>
-
-                <div class="project-footer">
-
-                    <span><img src="{{ url_for('static', filename='pngs/users.png') }}" alt="users" style="width:14px; height:14px; vertical-align:text-bottom; filter: grayscale(100%) opacity(0.6);"> 5</span>
-
-                    <span><img src="{{ url_for('static', filename='pngs/file.png') }}" alt="file" style="width:14px; height:14px; vertical-align:text-bottom; filter: grayscale(100%) opacity(0.6);"> 12</span>
-
-                    <span>◫ 24/04/2026</span>
-
-                </div>
-
-            </article>
-
-            <!-- CARD -->
-            <article class="project-card">
-
-                <div class="project-top">
-
-                    <div class="project-main-info">
-
-                        <div class="project-icon">
-                            ▣
-                        </div>
-
-                        <div>
-
-                            <div class="project-title-row">
-
-                                <h2>
-                                    App Mobile Banking
-                                </h2>
-
-                            </div>
-
-                            <div class="project-tags">
-
-                                <span class="tag green-tag">
-                                    Ativo
-                                </span>
-
-                                <span class="tag purple-tag">
-                                    ◇ Mobile
-                                </span>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <span class="project-dots">
-                        ⋮
-                    </span>
-
-                </div>
-
-                <p class="project-description">
-                    Aplicativo bancário para iOS e Android
-                </p>
-
-                <p class="project-link">
-                    ⑂ github.com/empresa/banking-app
-                </p>
-
-                <div class="project-footer">
-
-                    <span><img src="{{ url_for('static', filename='pngs/users.png') }}" alt="users" style="width:14px; height:14px; vertical-align:text-bottom; filter: grayscale(100%) opacity(0.6);"> 3</span>
-
-                    <span><img src="{{ url_for('static', filename='pngs/file.png') }}" alt="file" style="width:14px; height:14px; vertical-align:text-bottom; filter: grayscale(100%) opacity(0.6);"> 8</span>
-
-                    <span>◫ 23/04/2026</span>
-
-                </div>
-
-            </article>
-
-            <!-- CARD -->
-            <article class="project-card">
-
-                <div class="project-top">
-
-                    <div class="project-main-info">
-
-                        <div class="project-icon">
-                            ▣
-                        </div>
-
-                        <div>
-
-                            <div class="project-title-row">
-
-                                <h2>
-                                    Dashboard Analytics
-                                </h2>
-
-                                <span class="star">
-                                    ⭐
-                                </span>
-
-                            </div>
-
-                            <div class="project-tags">
-
-                                <span class="tag green-tag">
-                                    Ativo
-                                </span>
-
-                                <span class="tag purple-tag">
-                                    ◇ Data Science
-                                </span>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <span class="project-dots">
-                        ⋮
-                    </span>
-
-                </div>
-
-                <p class="project-description">
-                    Sistema de análise de dados e visualização
-                </p>
-
-                <p class="project-link">
-                    ⑂ github.com/empresa/analytics
-                </p>
-
-                <div class="project-footer">
-
-                    <span><img src="{{ url_for('static', filename='pngs/users.png') }}" alt="users" style="width:14px; height:14px; vertical-align:text-bottom; filter: grayscale(100%) opacity(0.6);"> 4</span>
-
-                    <span><img src="{{ url_for('static', filename='pngs/file.png') }}" alt="file" style="width:14px; height:14px; vertical-align:text-bottom; filter: grayscale(100%) opacity(0.6);"> 15</span>
-
-                    <span>◫ 22/04/2026</span>
-
-                </div>
-
-            </article>
-
-            <!-- CARD -->
-            <article class="project-card">
-
-                <div class="project-top">
-
-                    <div class="project-main-info">
-
-                        <div class="project-icon">
-                            ▣
-                        </div>
-
-                        <div>
-
-                            <div class="project-title-row">
-
-                                <h2>
-                                    API Gateway
-                                </h2>
-
-                            </div>
-
-                            <div class="project-tags">
-
-                                <span class="tag gray-tag">
-                                    Arquivado
-                                </span>
-
-                                <span class="tag purple-tag">
-                                    ◇ Backend
-                                </span>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <span class="project-dots">
-                        ⋮
-                    </span>
-
-                </div>
-
-                <p class="project-description">
-                    Gateway de microserviços com autenticação
-                </p>
-
-                <p class="project-link">
-                    ⑂ github.com/empresa/api-gateway
-                </p>
-
-                <div class="project-footer">
-
-                    <span><img src="{{ url_for('static', filename='pngs/users.png') }}" alt="users" style="width:14px; height:14px; vertical-align:text-bottom; filter: grayscale(100%) opacity(0.6);"> 2</span>
-
-                    <span><img src="{{ url_for('static', filename='pngs/file.png') }}" alt="file" style="width:14px; height:14px; vertical-align:text-bottom; filter: grayscale(100%) opacity(0.6);"> 6</span>
-
-                    <span>◫ 19/04/2026</span>
-
-                </div>
-
-            </article>
-
+        <section class="projects-grid" id="projects-grid">
+            <!-- Projetos serão carregados aqui via JS -->
+            <p style="padding: 40px; grid-column: 1/-1; text-align: center; color: #666;">Carregando projetos...</p>
         </section>
 
     </section>
@@ -408,56 +151,99 @@
 </div>
 
 <script>
+async function loadProjects() {
+    try {
+        // 1. Perfil do Usuário
+        const userResp = await fetch(API_URLS.auth + "/perfil/me", { headers: authHeaders() });
+        const user = await handleResponse(userResp);
+        document.getElementById('sidebar-user-name').innerText = user.nome;
+        document.getElementById('sidebar-user-email').innerText = user.email;
+
+        // 2. Carregar Projetos
+        const resp = await fetch(API_URLS.projetos + "/projetos", { headers: authHeaders() });
+        const projects = await handleResponse(resp);
+        renderProjects(projects);
+
+    } catch (error) {
+        console.error("Erro ao carregar projetos:", error);
+    }
+}
+
+function renderProjects(projects) {
+    const grid = document.getElementById('projects-grid');
+    if (projects.length === 0) {
+        grid.innerHTML = '<p style="padding: 40px; grid-column: 1/-1; text-align: center; color: #666;">Você ainda não possui projetos.</p>';
+        return;
+    }
+
+    grid.innerHTML = projects.map(p => `
+        <article class="project-card" onclick="window.location.href='/projeto?id=${p.id}'" style="cursor: pointer;">
+            <div class="project-top">
+                <div class="project-main-info">
+                    <div class="project-icon">▣</div>
+                    <div>
+                        <div class="project-title-row">
+                            <h2>${p.nome}</h2>
+                        </div>
+                        <div class="project-tags">
+                            <span class="tag ${p.status === 'ativo' ? 'green-tag' : 'gray-tag'}">
+                                ${p.status.charAt(0).toUpperCase() + p.status.slice(1)}
+                            </span>
+                            <span class="tag purple-tag">
+                                ◇ ${p.categoria || 'Geral'}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <span class="project-dots">⋮</span>
+            </div>
+            <p class="project-description">${p.descricao || 'Sem descrição'}</p>
+            <p class="project-link">${p.link_repo || 'Sem repositório vinculado'}</p>
+            <div class="project-footer">
+                <span><img src="/static/pngs/users.png" style="width:14px; height:14px; vertical-align:text-bottom; filter: grayscale(100%) opacity(0.6);"> ?</span>
+                <span><img src="/static/pngs/file.png" style="width:14px; height:14px; vertical-align:text-bottom; filter: grayscale(100%) opacity(0.6);"> ?</span>
+                <span>◫ ${new Date(p.criado_em).toLocaleDateString()}</span>
+            </div>
+        </article>
+    `).join('');
+}
+
+// Criar Novo Projeto
+document.getElementById('btn-novo-projeto').addEventListener('click', async () => {
+    // Para criar um projeto fora da página de uma empresa, precisamos saber qual empresa usar.
+    // Como simplificação, vamos perguntar o ID da empresa ou o nome.
+    // Em um sistema real, teríamos um select com as empresas do usuário.
+    const empresaId = prompt("Digite o ID da empresa para este projeto:");
+    if (!empresaId) return;
+
+    const nome = prompt("Digite o nome do novo projeto:");
+    if (!nome) return;
+
+    try {
+        const resp = await fetch(API_URLS.projetos + "/projetos", {
+            method: "POST",
+            headers: authHeaders(),
+            body: JSON.stringify({
+                nome: nome,
+                descricao: "Projeto criado via lista geral",
+                empresa_id: parseInt(empresaId),
+                categoria: "Desenvolvimento"
+            })
+        });
+        await handleResponse(resp);
+        alert("Projeto criado com sucesso!");
+        loadProjects();
+    } catch (error) {
+        alert(error.message);
+    }
+});
+
+document.addEventListener('DOMContentLoaded', loadProjects);
 
 function toggleUserMenu() {
-
     const menu = document.getElementById("userMenu");
-
     menu.classList.toggle("show");
-
 }
-
-window.addEventListener("click", function(e) {
-
-    const menu = document.getElementById("userMenu");
-
-    const button = document.querySelector(".user-toggle");
-
-    if (
-        !menu.contains(e.target)
-        &&
-        !button.contains(e.target)
-    ) {
-        menu.classList.remove("show");
-    }
-
-});
-
-</script>
-<script>
-function toggleCompanyMenu() {
-
-    const menu = document.getElementById("companyMenu");
-
-    menu.classList.toggle("show");
-
-}
-
-window.addEventListener("click", function(e) {
-
-    const menu = document.getElementById("companyMenu");
-
-    const button = document.querySelector(".company-toggle");
-
-    if (
-        !menu.contains(e.target)
-        &&
-        !button.contains(e.target)
-    ) {
-        menu.classList.remove("show");
-    }
-
-});
 </script>
 
 </body>

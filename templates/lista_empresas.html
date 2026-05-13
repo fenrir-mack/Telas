@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>DocuIA - Empresas</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="{{ url_for('static', filename='js/auth-guard.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/api.js') }}"></script>
 </head>
 
 <body class="dashboard-body">
@@ -43,8 +45,8 @@
                 <div class="profile-mini-avatar">U</div>
 
                 <div class="user-info">
-                    <strong>Usuário</strong>
-                    <p>asd@a</p>
+                    <strong id="sidebar-user-name">Usuário</strong>
+                    <p id="sidebar-user-email">email@exemplo.com</p>
                 </div>
 
                 <span class="dropdown-arrow">⌄</span>
@@ -63,7 +65,7 @@
                 <p>Gerencie suas organizações e empresas</p>
             </div>
 
-            <button class="new-company-btn">
+            <button class="new-company-btn" id="btn-nova-empresa">
                 + Nova Empresa
             </button>
         </header>
@@ -73,63 +75,9 @@
             <input type="text" placeholder="Buscar empresas...">
         </div>
 
-        <section class="companies-grid">
-
-            <article class="company-card">
-                <div class="company-card-top">
-                    <div class="company-big-icon purple">▤</div>
-                    <span class="dots">⋮</span>
-                </div>
-
-                <h2>Empresa Demo</h2>
-
-                <div class="badges">
-                    <span class="badge owner">♕ Proprietário</span>
-                    <span class="badge">Owner</span>
-                </div>
-
-                <div class="company-card-footer">
-                    <span><img src="{{ url_for('static', filename='pngs/users.png') }}" alt="users" style="width:14px; height:14px; vertical-align:text-bottom; filter: grayscale(100%) opacity(0.6);"> 12 membros</span>
-                    <span><img src="{{ url_for('static', filename='pngs/folder.png') }}" alt="folder" style="width:14px; height:14px; vertical-align:text-bottom; filter: grayscale(100%) opacity(0.6);"> 8 projetos</span>
-                </div>
-            </article>
-
-            <article class="company-card">
-                <div class="company-card-top">
-                    <div class="company-big-icon green">▤</div>
-                    <span class="dots">⋮</span>
-                </div>
-
-                <h2>Tech Startup Inc</h2>
-
-                <div class="badges">
-                    <span class="badge">Admin</span>
-                </div>
-
-                <div class="company-card-footer">
-                    <span><img src="{{ url_for('static', filename='pngs/users.png') }}" alt="users" style="width:14px; height:14px; vertical-align:text-bottom; filter: grayscale(100%) opacity(0.6);"> 5 membros</span>
-                    <span><img src="{{ url_for('static', filename='pngs/folder.png') }}" alt="folder" style="width:14px; height:14px; vertical-align:text-bottom; filter: grayscale(100%) opacity(0.6);"> 3 projetos</span>
-                </div>
-            </article>
-
-            <article class="company-card">
-                <div class="company-card-top">
-                    <div class="company-big-icon red-orange">▤</div>
-                    <span class="dots">⋮</span>
-                </div>
-
-                <h2>Consultoria XYZ</h2>
-
-                <div class="badges">
-                    <span class="badge">Member</span>
-                </div>
-
-                <div class="company-card-footer">
-                    <span><img src="{{ url_for('static', filename='pngs/users.png') }}" alt="users" style="width:14px; height:14px; vertical-align:text-bottom; filter: grayscale(100%) opacity(0.6);"> 25 membros</span>
-                    <span><img src="{{ url_for('static', filename='pngs/folder.png') }}" alt="folder" style="width:14px; height:14px; vertical-align:text-bottom; filter: grayscale(100%) opacity(0.6);"> 15 projetos</span>
-                </div>
-            </article>
-
+        <section class="companies-grid" id="companies-grid">
+            <!-- Empresas serão carregadas aqui via JS -->
+            <p style="padding: 20px; grid-column: 1/-1; text-align: center; color: #666;">Carregando empresas...</p>
         </section>
 
     </section>
@@ -139,44 +87,85 @@
 <div class="help-btn">?</div>
 
 <script>
+async function loadCompanies() {
+    try {
+        // 1. Carregar Perfil (Sidebar)
+        const userResp = await fetch(API_URLS.auth + "/perfil/me", { headers: authHeaders() });
+        const user = await handleResponse(userResp);
+        document.getElementById('sidebar-user-name').innerText = user.nome;
+        document.getElementById('sidebar-user-email').innerText = user.email;
+
+        // 2. Carregar Empresas
+        const resp = await fetch(API_URLS.empresas + "/empresas", { headers: authHeaders() });
+        const companies = await handleResponse(resp);
+        renderCompanies(companies);
+
+    } catch (error) {
+        console.error("Erro ao carregar empresas:", error);
+    }
+}
+
+function renderCompanies(companies) {
+    const grid = document.getElementById('companies-grid');
+    if (companies.length === 0) {
+        grid.innerHTML = '<p style="padding: 40px; grid-column: 1/-1; text-align: center; color: #666;">Você ainda não participa de nenhuma empresa.</p>';
+        return;
+    }
+
+    const colors = ['purple', 'green', 'red-orange', 'blue'];
+
+    grid.innerHTML = companies.map((c, index) => `
+        <article class="company-card" onclick="window.location.href='/empresa?id=${c.id}'" style="cursor: pointer;">
+            <div class="company-card-top">
+                <div class="company-big-icon ${colors[index % colors.length]}">▤</div>
+                <span class="dots">⋮</span>
+            </div>
+            <h2>${c.nome}</h2>
+            <div class="badges">
+                ${c.dono_id === parseInt(localStorage.getItem('user_id')) ? '<span class="badge owner">♕ Proprietário</span>' : '<span class="badge">Membro</span>'}
+            </div>
+            <div class="company-card-footer">
+                <span><img src="/static/pngs/users.png" style="width:14px; height:14px; vertical-align:text-bottom; filter: grayscale(100%) opacity(0.6);"> Membros</span>
+                <span><img src="/static/pngs/folder.png" style="width:14px; height:14px; vertical-align:text-bottom; filter: grayscale(100%) opacity(0.6);"> Projetos</span>
+            </div>
+        </article>
+    `).join('');
+}
+
+// Criar Nova Empresa
+document.getElementById('btn-nova-empresa').addEventListener('click', async () => {
+    const nome = prompt("Digite o nome da nova empresa:");
+    if (!nome) return;
+
+    const descricao = prompt("Digite uma breve descrição:");
+
+    try {
+        const resp = await fetch(API_URLS.empresas + "/empresas", {
+            method: "POST",
+            headers: authHeaders(),
+            body: JSON.stringify({ nome, descricao })
+        });
+        await handleResponse(resp);
+        alert("Empresa criada com sucesso!");
+        loadCompanies();
+    } catch (error) {
+        alert(error.message);
+    }
+});
+
+document.addEventListener('DOMContentLoaded', loadCompanies);
+
+// Toggle menu logic
 function toggleUserMenu() {
     const menu = document.getElementById("userMenu");
     menu.classList.toggle("show");
 }
-
 window.addEventListener("click", function(e) {
     const menu = document.getElementById("userMenu");
     const button = document.querySelector(".user-toggle");
-
-    if (!menu.contains(e.target) && !button.contains(e.target)) {
+    if (menu && !menu.contains(e.target) && button && !button.contains(e.target)) {
         menu.classList.remove("show");
     }
-});
-</script>
-
-<script>
-function toggleCompanyMenu() {
-
-    const menu = document.getElementById("companyMenu");
-
-    menu.classList.toggle("show");
-
-}
-
-window.addEventListener("click", function(e) {
-
-    const menu = document.getElementById("companyMenu");
-
-    const button = document.querySelector(".company-toggle");
-
-    if (
-        !menu.contains(e.target)
-        &&
-        !button.contains(e.target)
-    ) {
-        menu.classList.remove("show");
-    }
-
 });
 </script>
 

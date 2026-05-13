@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>DocuIA - Perfil</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="{{ url_for('static', filename='js/auth-guard.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/api.js') }}"></script>
 </head>
 <body class="dashboard-body">
 
@@ -44,8 +46,8 @@
             <div class="profile-mini-avatar">U</div>
 
             <div class="user-info">
-                <strong>Usuário</strong>
-                <p>asd@a</p>
+                <strong id="sidebar-user-name">Usuário</strong>
+                <p id="sidebar-user-email">email@exemplo.com</p>
             </div>
 
             <span class="dropdown-arrow">⌄</span>
@@ -75,37 +77,41 @@
                 <div class="profile-avatar">U</div>
 
                 <div>
-                    <h3>Usuário</h3>
-                    <p>Desenvolvedor</p>
+                    <h3 id="profile-display-name">Usuário</h3>
+                    <p id="profile-display-role">Cargo</p>
                 </div>
             </div>
 
-            <form>
+            <form id="profile-form">
                 <div class="profile-grid">
                     <div class="profile-field">
                         <label>Nome completo</label>
-                        <div class="profile-input">♙ <input type="text" value="Usuário"></div>
+                        <div class="profile-input">♙ <input type="text" id="edit-nome" value="Usuário"></div>
                     </div>
 
                     <div class="profile-field">
                         <label>E-mail</label>
-                        <div class="profile-input">✉ <input type="email" value="asd@a"></div>
+                        <div class="profile-input">✉ <input type="email" id="edit-email" value="email@exemplo.com" disabled></div>
                     </div>
 
                     <div class="profile-field">
                         <label>Empresa</label>
-                        <div class="profile-input"><input type="text" value="Empresa Demo"></div>
+                        <div class="profile-input"><input type="text" id="edit-empresa" value="Empresa Demo" disabled></div>
                     </div>
 
                     <div class="profile-field">
                         <label>Cargo/Função</label>
-                        <div class="profile-input"><input type="text" value="Desenvolvedor"></div>
+                        <div class="profile-input"><input type="text" id="edit-cargo" value="Cargo"></div>
                     </div>
                 </div>
 
                 <div class="profile-field bio-field">
                     <label>Biografia</label>
-                    <textarea>Desenvolvedor full-stack com foco em documentação técnica e automação.</textarea>
+                    <textarea id="edit-bio">Biografia do usuário...</textarea>
+                </div>
+
+                <div style="text-align: right; margin-top: 20px;">
+                    <button type="submit" class="btn-primary">Salvar Alterações</button>
                 </div>
             </form>
         </section>
@@ -113,20 +119,20 @@
         <section class="profile-card password-card">
             <h2>Alterar Senha</h2>
 
-            <form>
+            <form id="password-form">
                 <div class="profile-field">
                     <label>Senha atual</label>
-                    <div class="profile-input">▢ <input type="password" value="12345678"></div>
+                    <div class="profile-input">▢ <input type="password" id="current-password" required></div>
                 </div>
 
                 <div class="profile-field">
                     <label>Nova senha</label>
-                    <div class="profile-input">▢ <input type="password" value="12345678"></div>
+                    <div class="profile-input">▢ <input type="password" id="new-password" required></div>
                 </div>
 
                 <div class="profile-field">
                     <label>Confirmar nova senha</label>
-                    <div class="profile-input">▢ <input type="password" value="12345678"></div>
+                    <div class="profile-input">▢ <input type="password" id="confirm-new-password" required></div>
                 </div>
 
                 <button class="password-btn" type="submit">▢ Alterar Senha</button>
@@ -140,45 +146,106 @@
 <div class="help-btn">?</div>
 
 <script>
-function toggleUserMenu() {
-    const menu = document.getElementById("userMenu");
-    menu.classList.toggle("show");
+async function loadProfile() {
+    try {
+        const response = await fetch(API_URLS.auth + "/perfil/me", {
+            headers: authHeaders()
+        });
+        const user = await handleResponse(response);
+
+        // Sidebar
+        document.getElementById('sidebar-user-name').innerText = user.nome;
+        document.getElementById('sidebar-user-email').innerText = user.email;
+
+        // Display
+        document.getElementById('profile-display-name').innerText = user.nome;
+        document.getElementById('profile-display-role').innerText = user.cargo || "Não informado";
+
+        // Form fields
+        document.getElementById('edit-nome').value = user.nome;
+        document.getElementById('edit-email').value = user.email;
+        document.getElementById('edit-cargo').value = user.cargo || "";
+        document.getElementById('edit-bio').value = user.bio || "";
+
+    } catch (error) {
+        console.error("Erro ao carregar perfil:", error);
+    }
 }
 
-window.addEventListener("click", function(e) {
-    const menu = document.getElementById("userMenu");
-    const button = document.querySelector(".user-toggle");
+// Salvar Perfil
+document.getElementById('profile-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = e.target.querySelector('button');
+    const originalText = btn.innerText;
 
-    if (!menu.contains(e.target) && !button.contains(e.target)) {
-        menu.classList.remove("show");
+    try {
+        btn.innerText = "Salvando...";
+        btn.disabled = true;
+
+        const response = await fetch(API_URLS.auth + "/perfil/me", {
+            method: "PUT",
+            headers: authHeaders(),
+            body: JSON.stringify({
+                nome: document.getElementById('edit-nome').value,
+                cargo: document.getElementById('edit-cargo').value,
+                bio: document.getElementById('edit-bio').value
+            })
+        });
+
+        const data = await handleResponse(response);
+        alert("Perfil atualizado com sucesso!");
+        loadProfile(); // Recarrega os dados
+
+    } catch (error) {
+        alert(error.message);
+    } finally {
+        btn.innerText = originalText;
+        btn.disabled = false;
     }
 });
-</script>
 
-<script>
-function toggleCompanyMenu() {
+// Alterar Senha
+document.getElementById('password-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const currentPassword = document.getElementById('current-password').value;
+    const newPassword = document.getElementById('new-password').value;
+    const confirmNew = document.getElementById('confirm-new-password').value;
 
-    const menu = document.getElementById("companyMenu");
-
-    menu.classList.toggle("show");
-
-}
-
-window.addEventListener("click", function(e) {
-
-    const menu = document.getElementById("companyMenu");
-
-    const button = document.querySelector(".company-toggle");
-
-    if (
-        !menu.contains(e.target)
-        &&
-        !button.contains(e.target)
-    ) {
-        menu.classList.remove("show");
+    if (newPassword !== confirmNew) {
+        alert("As novas senhas não coincidem!");
+        return;
     }
 
+    const btn = e.target.querySelector('button');
+    const originalText = btn.innerText;
+
+    try {
+        btn.innerText = "Alterando...";
+        btn.disabled = true;
+
+        const response = await fetch(API_URLS.auth + "/perfil/me/senha", {
+            method: "PUT",
+            headers: authHeaders(),
+            body: JSON.stringify({
+                senha_atual: currentPassword,
+                nova_senha: newPassword
+            })
+        });
+
+        await handleResponse(response);
+        alert("Senha alterada com sucesso!");
+        e.target.reset();
+
+    } catch (error) {
+        alert(error.message);
+    } finally {
+        btn.innerText = originalText;
+        btn.disabled = false;
+    }
 });
+
+document.addEventListener('DOMContentLoaded', loadProfile);
 </script>
 
 </body>

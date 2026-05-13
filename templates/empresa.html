@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>DocuIA - Empresas</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="{{ url_for('static', filename='js/auth-guard.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/api.js') }}"></script>
 </head>
 
 <body class="dashboard-body">
@@ -43,8 +45,8 @@
                 <div class="profile-mini-avatar">U</div>
 
                 <div class="user-info">
-                    <strong>Usuário</strong>
-                    <p>asd@a</p>
+                    <strong id="sidebar-user-name">Usuário</strong>
+                    <p id="sidebar-user-email">email@exemplo.com</p>
                 </div>
 
                 <span class="dropdown-arrow">⌄</span>
@@ -63,28 +65,28 @@
                     <img src="{{ url_for('static', filename='pngs/business-and-trade.png') }}" alt="Empresa" style="width:28px; height:28px; filter: brightness(0) invert(1);">
                 </div>
                 <div class="project-info-large">
-                    <h1>Empresa Demo</h1>
-                    <p>Empresa de desenvolvimento de software</p>
+                    <h1 id="company-name">Carregando...</h1>
+                    <p id="company-description">Carregando descrição da empresa...</p>
                 </div>
             </div>
         </div>
 
         <div class="company-stats-grid">
             <div class="company-stat-card">
-                <span><img src="{{ url_for('static', filename='pngs/folder.png') }}" alt="Projetos" style="width:14px; height:14px;"> Projetos</span>
-                <strong>8</strong>
+                <span><img src="/static/pngs/folder.png" alt="Projetos" style="width:14px; height:14px;"> Projetos</span>
+                <strong id="stats-projects">0</strong>
             </div>
             <div class="company-stat-card">
-                <span><img src="{{ url_for('static', filename='pngs/users.png') }}" alt="Membros" style="width:14px; height:14px;"> Memembros</span>
-                <strong>12</strong>
+                <span><img src="/static/pngs/users.png" alt="Membros" style="width:14px; height:14px;"> Membros</span>
+                <strong id="stats-members">0</strong>
             </div>
             <div class="company-stat-card">
-                <span><img src="{{ url_for('static', filename='pngs/users.png') }}" alt="Admins" style="width:14px; height:14px;"> Admins</span>
-                <strong>2</strong>
+                <span><img src="/static/pngs/users.png" alt="Admins" style="width:14px; height:14px;"> Admins</span>
+                <strong id="stats-admins">0</strong>
             </div>
             <div class="company-stat-card">
-                <span><img src="{{ url_for('static', filename='pngs/users.png') }}" alt="Owners" style="width:14px; height:14px;"> Owners</span>
-                <strong>1</strong>
+                <span><img src="/static/pngs/users.png" alt="Owners" style="width:14px; height:14px;"> Owners</span>
+                <strong id="stats-owners">0</strong>
             </div>
         </div>
 
@@ -97,33 +99,14 @@
 
         <div class="members-header">
             <h2>Projetos da Empresa</h2>
-            <button class="btn-primary btn-sm">
+            <button class="btn-primary btn-sm" id="btn-novo-projeto">
                 + Novo Projeto
             </button>
         </div>
 
-        <div class="company-projects-list">
-            <div class="company-project-card">
-                <h4>Sistema E-commerce</h4>
-                <p>
-                    <span style="display: flex; align-items: center; gap: 4px;"><img src="{{ url_for('static', filename='pngs/users.png') }}" alt="users" style="width:14px; height:14px; filter: grayscale(100%) opacity(0.6);"> 5</span>
-                    <span style="display: flex; align-items: center; gap: 4px;"><img src="{{ url_for('static', filename='pngs/file.png') }}" alt="docs" style="width:14px; height:14px; filter: grayscale(100%) opacity(0.6);"> 12 docs</span>
-                </p>
-            </div>
-            <div class="company-project-card">
-                <h4>App Mobile Banking</h4>
-                <p>
-                    <span style="display: flex; align-items: center; gap: 4px;"><img src="{{ url_for('static', filename='pngs/users.png') }}" alt="users" style="width:14px; height:14px; filter: grayscale(100%) opacity(0.6);"> 3</span>
-                    <span style="display: flex; align-items: center; gap: 4px;"><img src="{{ url_for('static', filename='pngs/file.png') }}" alt="docs" style="width:14px; height:14px; filter: grayscale(100%) opacity(0.6);"> 8 docs</span>
-                </p>
-            </div>
-            <div class="company-project-card">
-                <h4>Dashboard Analytics</h4>
-                <p>
-                    <span style="display: flex; align-items: center; gap: 4px;"><img src="{{ url_for('static', filename='pngs/users.png') }}" alt="users" style="width:14px; height:14px; filter: grayscale(100%) opacity(0.6);"> 4</span>
-                    <span style="display: flex; align-items: center; gap: 4px;"><img src="{{ url_for('static', filename='pngs/file.png') }}" alt="docs" style="width:14px; height:14px; filter: grayscale(100%) opacity(0.6);"> 15 docs</span>
-                </p>
-            </div>
+        <div class="company-projects-list" id="projects-list">
+            <!-- Projetos serão carregados aqui via JS -->
+            <p style="padding: 20px; color: #666;">Carregando projetos...</p>
         </div>
 
     </section>
@@ -133,45 +116,101 @@
 <div class="help-btn">?</div>
 
 <script>
+const urlParams = new URLSearchParams(window.location.search);
+const companyId = urlParams.get('id');
+
+if (!companyId) {
+    alert("Empresa não especificada!");
+    window.location.href = "/empresas";
+}
+
+async function loadCompanyDetails() {
+    try {
+        // 1. Perfil do Usuário
+        const userResp = await fetch(API_URLS.auth + "/perfil/me", { headers: authHeaders() });
+        const user = await handleResponse(userResp);
+        document.getElementById('sidebar-user-name').innerText = user.nome;
+        document.getElementById('sidebar-user-email').innerText = user.email;
+
+        // 2. Detalhes da Empresa (MS2)
+        const compResp = await fetch(API_URLS.empresas + "/empresas/" + companyId, {
+            headers: authHeaders()
+        });
+        const company = await handleResponse(compResp);
+        document.getElementById('company-name').innerText = company.nome;
+        document.getElementById('company-description').innerText = company.descricao || "Sem descrição disponível";
+
+        // 3. Membros da Empresa (MS2)
+        const membersResp = await fetch(API_URLS.empresas + "/empresas/" + companyId + "/membros", {
+            headers: authHeaders()
+        });
+        const members = await handleResponse(membersResp);
+        document.getElementById('stats-members').innerText = members.length;
+        document.getElementById('stats-admins').innerText = members.filter(m => m.role === 'admin').length;
+        document.getElementById('stats-owners').innerText = members.filter(m => m.role === 'owner').length;
+
+        // 4. Projetos da Empresa (MS3 - Precisamos filtrar por empresa_id)
+        const projResp = await fetch(API_URLS.projetos + "/projetos", {
+            headers: authHeaders()
+        });
+        const allProjects = await handleResponse(projResp);
+        const companyProjects = allProjects.filter(p => p.empresa_id == companyId);
+        
+        renderProjects(companyProjects);
+        document.getElementById('stats-projects').innerText = companyProjects.length;
+
+    } catch (error) {
+        console.error("Erro ao carregar detalhes:", error);
+    }
+}
+
+function renderProjects(projects) {
+    const list = document.getElementById('projects-list');
+    if (projects.length === 0) {
+        list.innerHTML = '<p style="padding: 20px; color: #666;">Nenhum projeto cadastrado nesta empresa.</p>';
+        return;
+    }
+
+    list.innerHTML = projects.map(p => `
+        <div class="company-project-card" onclick="window.location.href='/projeto?id=${p.id}'" style="cursor: pointer;">
+            <h4>${p.nome}</h4>
+            <p>
+                <span style="display: flex; align-items: center; gap: 4px;"><img src="/static/pngs/users.png" style="width:14px; height:14px; filter: grayscale(100%) opacity(0.6);"> ?</span>
+                <span style="display: flex; align-items: center; gap: 4px;"><img src="/static/pngs/file.png" style="width:14px; height:14px; filter: grayscale(100%) opacity(0.6);"> ? docs</span>
+            </p>
+        </div>
+    `).join('');
+}
+
+// Criar Novo Projeto
+document.getElementById('btn-novo-projeto').addEventListener('click', async () => {
+    const nome = prompt("Digite o nome do novo projeto:");
+    if (!nome) return;
+
+    try {
+        const resp = await fetch(API_URLS.projetos + "/projetos", {
+            method: "POST",
+            headers: authHeaders(),
+            body: JSON.stringify({
+                nome: nome,
+                descricao: "Projeto criado via portal",
+                empresa_id: parseInt(companyId)
+            })
+        });
+        await handleResponse(resp);
+        alert("Projeto criado com sucesso!");
+        loadCompanyDetails();
+    } catch (error) {
+        alert(error.message);
+    }
+});
+
+document.addEventListener('DOMContentLoaded', loadCompanyDetails);
+
 function toggleUserMenu() {
     const menu = document.getElementById("userMenu");
     menu.classList.toggle("show");
 }
-
-window.addEventListener("click", function(e) {
-    const menu = document.getElementById("userMenu");
-    const button = document.querySelector(".user-toggle");
-
-    if (!menu.contains(e.target) && !button.contains(e.target)) {
-        menu.classList.remove("show");
-    }
-});
-</script>
-
-<script>
-function toggleCompanyMenu() {
-
-    const menu = document.getElementById("companyMenu");
-
-    menu.classList.toggle("show");
-
-}
-
-window.addEventListener("click", function(e) {
-
-    const menu = document.getElementById("companyMenu");
-
-    const button = document.querySelector(".company-toggle");
-
-    if (
-        !menu.contains(e.target)
-        &&
-        !button.contains(e.target)
-    ) {
-        menu.classList.remove("show");
-    }
-
-});
 </script>
 
 </body>
